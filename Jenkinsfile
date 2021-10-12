@@ -1,43 +1,30 @@
 pipeline {
-
-  agent any
-
+  agent none
   stages {
-
-    stage('Checkout Source') {
+    stage('Maven Install') {
+      agent {
+        docker {
+          image 'maven:3.5.0'
+        }
+      }
       steps {
-        git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
+        sh 'mvn clean install'
       }
     }
-    
-      stage("Build image") {
-            steps {
-                script {
-                    myapp = docker.build("sbhalsing0/nodeapp:${env.BUILD_ID}")
-                }
-            }
-        }
-    
-      stage("Push image") {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            myapp.push("latest")
-                            myapp.push("${env.BUILD_ID}")
-                    }
-                }
-            }
-        }
-
-    
-    stage('Deploy App') {
+    stage('Docker Build') {
+      agent any
       steps {
-        script {
-          kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
+        sh 'docker build -t he .'
+      }
+    }
+    stage('Docker Push') {
+      agent any
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerHub')]) {
+          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'docker push shanem/spring-petclinic:latest'
         }
       }
     }
-
   }
-
 }
