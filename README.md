@@ -1,2 +1,2 @@
 # hellowhale
-Simple Docker Demo App for dourkeys
+Simple Docker Demo App for GCP Fourkeys
