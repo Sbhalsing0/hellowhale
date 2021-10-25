@@ -17,7 +17,7 @@ pipeline {
         sh "ls -lat"
       }
     }
-    stages("build and test the project") {
+    stages ("build and test the project") {
       stage("Building our image") {
         steps {
           script {
