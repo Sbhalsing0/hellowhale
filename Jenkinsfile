@@ -17,21 +17,18 @@ pipeline {
         sh "ls -lat"
       }
     }
-
-    stage("build and test the project") {
-      stages {
-        stage("Building our image") {
+    stages("build and test the project") {
+      stage("Building our image") {
+        steps {
+          script {
+            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          }
+        }
+        stage("Deploy Docker Image") {
           steps {
             script {
-              dockerImage = docker.build registry + ":$BUILD_NUMBER"
-            }
-          }
-          stage("Deploy Docker Image") {
-            steps {
-              script {
-                docker.withRegistry('', registryCredential) {
-                  dockerImage.push()
-                }
+              docker.withRegistry('', registryCredential) {
+                dockerImage.push()
               }
             }
           }
