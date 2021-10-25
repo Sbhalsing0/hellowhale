@@ -1,5 +1,12 @@
 pipeline {
-    agent any
+    environment { 
+        registry = "sbhalsing0/nodeapp" 
+        registryCredential = 'Dockerhub' 
+        dockerImage = ''
+    }
+    agent {
+       label "docker_slave_mvn"
+    }
     stages {
         stage("checkout code") {
             steps {
