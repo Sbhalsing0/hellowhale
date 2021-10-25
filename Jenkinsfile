@@ -14,7 +14,7 @@ pipeline {
 	           git branch: 'main',
 		           credentialsId: 'Github_Sanket',
                    url: 'https://github.com/Sbhalsing0/jenkins-terraform.git'
-               sh "ls -la"
+		   sh "docker --version"
             }
         }
         stage("build and test the project") {
