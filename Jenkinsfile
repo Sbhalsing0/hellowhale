@@ -1,30 +1,40 @@
-#!groovy
-
 pipeline {
-  agent none
+  environment {
+    registry = "sbhalsing0/nodeapp"
+    registryCredential = 'Dockerhub'
+    dockerImage = ''
+  }
+  agent {
+    label "docker_slave_mvn"
+  }
   stages {
-    stage('Maven Install') {
-      agent {
-        docker {
-          image 'maven:3.5.0'
-        }
-      }
+    stage("checkout code") {
       steps {
-        sh 'mvn --version'
-      }
-    }
-    stage('Docker Build') {
-      agent any
-      steps {
-        sh 'docker build -t shanem/spring-petclinic:latest .'
+        echo "Running in docker"
+        git branch: 'main',
+          credentialsId: 'Github_Sanket',
+          url: 'https://github.com/Sbhalsing0/jenkins-terraform.git'
+        sh "ls -lat"
       }
     }
-    stage('Docker Push') {
-      agent any
-      steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push shanem/spring-petclinic:latest'
+
+    stage("build and test the project") {
+      stages {
+        stage("Building our image") {
+          steps {
+            script {
+              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            }
+          }
+          stage("Deploy Docker Image") {
+            steps {
+              script {
+                docker.withRegistry('', registryCredential) {
+                  dockerImage.push()
+                }
+              }
+            }
+          }
         }
       }
     }
