@@ -15,6 +15,7 @@ pipeline {
 		           credentialsId: 'Github_Sanket',
                    url: 'https://github.com/Sbhalsing0/jenkins-terraform.git'
 		   sh "docker --version"
+		   sh "ls"
 		   sh "chown jenkins:docker /var/run/docker.sock"
             }
         }
