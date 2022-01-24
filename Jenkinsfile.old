@@ -5,7 +5,7 @@ pipeline {
         dockerImage = ''
     }
     agent {
-       label "docker_slave_mvn"
+       label "docker"
     }
     stages {
         stage("checkout code") {
