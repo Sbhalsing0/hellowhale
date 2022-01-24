@@ -1,11 +1,11 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCOUNT_ID=”746149138047”
-        AWS_DEFAULT_REGION=”us-east-1”
-        IMAGE_REPO_NAME=”crde-grafana”
-        IMAGE_TAG=”4.0”
-        REPOSITORY_URI = “${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}”
+        AWS_ACCOUNT_ID="746149138047"
+        AWS_DEFAULT_REGION="us-east-1”
+        IMAGE_REPO_NAME="crde-grafana"
+        IMAGE_TAG="4.0"
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
     }
    
     stages {
@@ -50,4 +50,3 @@ pipeline {
         }
       }
     }
-}
