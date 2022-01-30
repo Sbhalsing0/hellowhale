@@ -29,7 +29,10 @@ pipeline {
                stage("test") {
                   steps { 
                       script { 
-                         sh "ls"
+			sshagent(['ginger-onprem']) {
+    				sh 'echo "Adding new file" >> new.txt'
+    				sh 'scp new.txt vasirm01@dev-ginger-504.np.st1.yellowpages.com:/home/vasirm01/.'
+			      }
                         }
                     }  
                }
