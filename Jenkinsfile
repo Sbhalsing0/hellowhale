@@ -29,9 +29,9 @@ pipeline {
                stage("test") {
                   steps { 
                       script { 
-			sshagent(['ginger-onprem']) {
+			sshagent(['local_ubuntu']) {
     				sh 'echo "Adding new file" >> new.txt'
-    				sh 'scp new.txt vasirm01@dev-ginger-504.np.st1.yellowpages.com:/home/vasirm01/.'
+    				sh 'scp new.txt ubuntu@192.168.0.110:/home/ubuntu/.'
 			      }
                         }
                     }  
