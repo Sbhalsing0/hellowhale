@@ -20,7 +20,7 @@ pipeline {
             stages {
                stage("build") {
                    steps {
-		      sh "pwd"
+		      sh "ls"
 		      sh "chmod a+x setup_env.sh"
 		      sh "cat .env"
                    }
