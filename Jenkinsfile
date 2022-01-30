@@ -22,6 +22,7 @@ pipeline {
                    steps {
 		      sh "ls"
 		      sh "chmod a+x setup_env.sh"
+		      sh "./setup_env.sh"
 		      sh "cat .env"
                    }
                }
