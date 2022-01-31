@@ -11,6 +11,7 @@ pipeline {
         stage("checkout code") {
             steps {
                echo "Running in docker"
+		echo "Sanket Pipeline"
 	           git branch: 'main',
 		           credentialsId: 'Github_Sanket',
                    url: 'https://github.com/Sbhalsing0/jenkins-terraform.git'
@@ -31,7 +32,7 @@ pipeline {
                       script { 
 			sshagent(['local_ubuntu']) {
     				sh 'echo "Adding new file" >> new.txt'
-    				sh 'scp new.txt ubuntu@192.168.0.110:/home/ubuntu/.'
+    				//sh 'scp new.txt ubuntu@192.168.0.110:/home/ubuntu/.'
 			      }
                         }
                     }  
