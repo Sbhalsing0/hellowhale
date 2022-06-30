@@ -4,6 +4,7 @@ pipeline {
         registryCredential = 'Dockerhub' 
         dockerImage = ''
     }
+agent none
     stages {
         stage("checkout code") {
             steps {
