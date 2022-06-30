@@ -1,6 +1,6 @@
 ---
 - name: Configure the MS360 PKI RA Client Kit
-  hosts: localhost
+  hosts: all
   tasks:
   - name: Creates directory for pki-adoption-cassandra
     ansible.builtin.file:
