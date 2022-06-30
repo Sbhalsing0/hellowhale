@@ -1,10 +1,10 @@
 pipeline {
+    agent any
     environment { 
         registry = "sbhalsing0/nodeapp" 
         registryCredential = 'Dockerhub' 
         dockerImage = ''
     }
-    agent any
     stages {
         stage("checkout code") {
             steps {
