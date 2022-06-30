@@ -1,0 +1,35 @@
+---
+- name: Configure the MS360 PKI RA Client Kit
+  hosts: localhost
+  tasks:
+  - name: Creates directory for pki-adoption-cassandra
+    ansible.builtin.file:
+      path: /tmp/pki-adoption-cassandra
+      state: directory
+
+  - name: Download vault_key from ilnexusdmz07
+    become: yes
+    get_url:
+      url: https://github.com/helm/helm/archive/refs/tags/v3.9.0.zip
+      dest: /tmp/pki-adoption-cassandra/vault_key.txt
+      mode: 0600
+      group: root
+      owner: root
+      timeout: 20
+
+  - name: Download pki_ra_client from ilnexusdmz07
+    become: yes
+    get_url:
+      url: https://github.com/helm/helm/archive/refs/tags/v3.8.1.zip
+      dest: /tmp/pki-adoption-cassandra/
+      timeout: 20
+
+  - name: Unarchive pki_ra_client from ilnexusdmz07
+    ansible.builtin.unarchive:
+      src: /tmp/pki-adoption-cassandra/v3.9.0.zip
+      dest: /tmp/pki-adoption-cassandra/
+
+  - name: Delete content & directory for pki-adoption-cassandra
+    file:
+      path: "/root/pki-adoption-cassandra/"
+      state: absent
