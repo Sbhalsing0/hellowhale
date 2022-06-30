@@ -25,6 +25,7 @@ pipeline {
 		      sh "chmod a+x setup_env.sh"
 		      sh "./setup_env.sh"
 		      sh "cat .env"
+		      sH "ansible-playbook main.yml -i host.ini"
                    }
                }
                stage("test") {
