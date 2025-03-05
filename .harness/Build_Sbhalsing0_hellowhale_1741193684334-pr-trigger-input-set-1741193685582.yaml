@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Sbhalsing0_hellowhale_1741193684334-pr-trigger-input-set
+  identifier: Build_Sbhalsing0_hellowhale_1741193684334prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_Sbhalsing0_hellowhale_1741193684334
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
