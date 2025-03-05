@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Sbhalsing0_hellowhale_1741193684334-push-trigger-input-set
+  identifier: Build_Sbhalsing0_hellowhale_1741193684334pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_Sbhalsing0_hellowhale_1741193684334
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
